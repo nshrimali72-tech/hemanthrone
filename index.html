@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hemanthrone</title>
+  <meta name="google-site-verification" content="ohRWBoR112oCbwgPPLXTv2cxhHXqbI-Us-SX_JdkhuA" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #111;
+      color: white;
+      padding: 20px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #00adb5;
+      color: white;
+    }
+
+    .box {
+      margin: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #222;
+      margin: 5px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>hemanthrone</h1>
+
+<div class="box">
+  <h2>⏱ Timer</h2>
+  <input id="minutes" type="number" placeholder="Minutes">
+  <button onclick="startTimer()">Start</button>
+  <h3 id="time">0</h3>
+</div>
+
+<div class="box">
+  <h2>📝 Motivation</h2>
+  <input id="motivation" placeholder="Write something to yourself">
+  <button onclick="saveMessage()">Save</button>
+</div>
+
+<div class="box">
+  <h2>📋 To-Do</h2>
+  <input id="task" placeholder="New task">
+  <button onclick="addTask()">Add</button>
+  <ul id="list"></ul>
+</div>
+
+<script>
+let timer;
+
+function startTimer() {
+  let min = document.getElementById("minutes").value;
+  let seconds = min * 60;
+
+  clearInterval(timer);
+
+  timer = setInterval(() => {
+    if (seconds <= 0) {
+      clearInterval(timer);
+      alert("Break time 😄");
+    } else {
+      seconds--;
+      document.getElementById("time").innerText = seconds + " sec";
+    }
+  }, 1000);
+}
+
+function saveMessage() {
+  let msg = document.getElementById("motivation").value;
+  localStorage.setItem("msg", msg);
+  alert("Saved 😏");
+}
+
+function addTask() {
+  let task = document.getElementById("task").value;
+  let li = document.createElement("li");
+  li.innerText = task;
+  document.getElementById("list").appendChild(li);
+}
+
+window.onbeforeunload = function() {
+  let msg = localStorage.getItem("msg") || "Don't quit now 😤";
+  return msg;
+};
+</script>
+
+</body>
+
+
+</html>
